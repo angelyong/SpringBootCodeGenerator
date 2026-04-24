@@ -85,6 +85,9 @@
                 </div>
                 <div class="card-body">
                   <textarea id="inputArea" placeholder="请输入表结构信息..." style="height: 250px;" v-model="formData.tableSql"></textarea>
+                  <div id="charCounter" style="text-align: right; margin-top: 5px; font-size: 12px; color: #6c757d;">
+                    0 characters
+                  </div>
                 </div>
               </div>
               
@@ -255,6 +258,16 @@
   vm.formData.options.returnUtilFailure="${(value.returnUtilFailure)!!}";
   vm.outputStr="${(value.outputStr)!!}";
   loadAllCookie()
+
+  const inputArea = document.getElementById('inputArea');
+  const charCounter = document.getElementById('charCounter');
+  if (inputArea && charCounter) {
+    function updateCharCount() {
+      charCounter.innerHTML = inputArea.value.length + ' characters';
+    }
+    inputArea.addEventListener('input', updateCharCount);
+    updateCharCount();
+  }
 </script>
 </body>
 </html>
